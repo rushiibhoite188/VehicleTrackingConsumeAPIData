@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<VehicleTrackingContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("VehicleTrackingDB")));
 
-// here is we Register our   repositories
+// here is we Register our  repositories
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IUserVehicleRepository), typeof(UserVehicleRepository));
 
