@@ -1,0 +1,69 @@
+﻿@model IEnumerable<VehicleTrackingApp.Models.UserMasters>
+
+@{
+    ViewData["Title"] = "Users List";
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = Convert.ToInt32(ViewBag.TotalPages);
+}
+
+<h1>User List</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<a class="btn btn-primary mb-3" asp-action="Create">Add New User</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Mobile Number</th>
+            <th>Organization</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Photo Path</th>
+            <th>Buttons</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserID</td>
+                <td>@user.Name</td>
+                <td>@user.MobileNumber</td>
+                <td>@user.Organization</td>
+                <td>@user.Address</td>
+                <td>@user.Email</td>
+                <td>@user.Location</td>
+                <td>@user.PhotoPath</td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@user.UserID">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.UserID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <nav>
+        <ul class="pagination">
+            @for (var i = 1; i <= totalPages; i++)
+            {
+                <li class="@(currentPage == i ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

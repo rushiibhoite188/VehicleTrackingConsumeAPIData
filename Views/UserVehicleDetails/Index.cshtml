@@ -1,0 +1,88 @@
+﻿@model IEnumerable<VehicleTrackingApp.Models.UserVehicleDetailss>
+
+@{
+    ViewData["Title"] = "User Vehicle Details List";
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages != null ? Convert.ToInt32(ViewBag.TotalPages) : 0;
+}
+
+<h2>User Vehicle Details</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+<form method="get" asp-action="Index" class="form-inline mb-3">
+    <div class="form-group mr-2">
+        <input type="text" name="searchVehicleNumber" class="form-control" placeholder="Search by Vehicle Number" value="@ViewContext.HttpContext.Request.Query["searchVehicleNumber"]" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Vehicle</a>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Vehicle Number</th>
+            <th>Vehicle Type</th>
+            <th>Chassis Number</th>
+            <th>Engine Number</th>
+            <th>Manufacturing Year</th>
+            <th>Load Carrying Capacity</th>
+            <th>Make</th>
+            <th>Model Number</th>
+            <th>BodyType</th>
+            <th>Organization Name</th>
+            <th>Device ID</th>
+            <th>User Id</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var vehicle in Model)
+            {
+                <tr>
+                    <td>@vehicle.VehicleNumber</td>
+                    <td>@vehicle.VehicleType</td>
+                    <td>@vehicle.ChassisNumber</td>
+                    <td>@vehicle.EngineNumber</td>
+                    <td>@vehicle.ManufacturingYear</td>
+                    <td>@vehicle.LoadCarryingCapacity</td>
+                    <td>@vehicle.Make</td>
+                    <td>@vehicle.ModelNumber</td>
+                    <td>@vehicle.BodyType</td>
+                    <td>@vehicle.OrganizationName</td>
+                    <td>@vehicle.DeviceID</td>
+                    <td>@vehicle.UserID</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-vehicleNumber="@vehicle.VehicleNumber" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-vehicleNumber="@vehicle.VehicleNumber" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="13" class="text-center">No vehicles found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <nav>
+        <ul class="pagination">
+            @for (var i = 1; i <= totalPages; i++)
+            {
+                <li class="@(currentPage == i ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-searchVehicleNumber="@ViewContext.HttpContext.Request.Query["searchVehicleNumber"]">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,79 @@
+﻿@model VehicleTrackingApp.Models.UserVehicleDetailss
+
+@{
+    ViewData["Title"] = "Add Vehicle Details";
+}
+
+<h2>Add Vehicle Details</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="VehicleNumber"></label>
+        <input asp-for="VehicleNumber" class="form-control" />
+        <span asp-validation-for="VehicleNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VehicleType"></label>
+        <input asp-for="VehicleType" class="form-control" />
+        <span asp-validation-for="VehicleType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ChassisNumber"></label>
+        <input asp-for="ChassisNumber" class="form-control" />
+        <span asp-validation-for="ChassisNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EngineNumber"></label>
+        <input asp-for="EngineNumber" class="form-control" />
+        <span asp-validation-for="EngineNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ManufacturingYear"></label>
+        <select asp-for="ManufacturingYear" class="form-control">
+            <option value="">-- Select Year --</option>
+            @for (int year = 1990; year <= 2024; year++)
+            {
+                <option value="@year">@year</option>
+            }
+        </select>
+        <span asp-validation-for="ManufacturingYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LoadCarryingCapacity"></label>
+        <input asp-for="LoadCarryingCapacity" class="form-control" />
+        <span asp-validation-for="LoadCarryingCapacity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Make"></label>
+        <input asp-for="Make" class="form-control" />
+        <span asp-validation-for="Make" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ModelNumber"></label>
+        <input asp-for="ModelNumber" class="form-control" />
+        <span asp-validation-for="ModelNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BodyType"></label>
+        <input asp-for="BodyType" class="form-control" />
+        <span asp-validation-for="BodyType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OrganizationName"></label>
+        <input asp-for="OrganizationName" class="form-control" />
+        <span asp-validation-for="OrganizationName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DeviceID"></label>
+        <input asp-for="DeviceID" class="form-control" />
+        <span asp-validation-for="DeviceID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserID"></label>
+        <input asp-for="UserID" class="form-control" />
+        <span asp-validation-for="UserID" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,42 @@
+﻿@model VehicleTrackingApp.Models.UserMasters
+
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<h1>Delete User</h1>
+
+<div>
+    <h4>Are you sure you want to delete this user?</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+        <dt class="col-sm-2">Mobile Number</dt>
+        <dd class="col-sm-10">@Model.MobileNumber</dd>
+        <dt class="col-sm-2">Organization</dt>
+        <dd class="col-sm-10">@Model.Organization</dd>
+        <dt class="col-sm-2">Address</dt>
+        <dd class="col-sm-10">@Model.Address</dd>
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+        <dt class="col-sm-2">Location</dt>
+        <dd class="col-sm-10">@Model.Location</dd>
+        <dt class="col-sm-2">Photo</dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.PhotoPath))
+            {
+                <img src="@Model.PhotoPath" alt="Photo" style="width: 100px; height: 100px;" />
+            }
+            else
+            {
+                <span>No Photo</span>
+            }
+        </dd>
+    </dl>
+
+    <form asp-action="DeleteConfirmed" method="post" asp-route-id="@Model.UserID">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+    </form>
+</div>
